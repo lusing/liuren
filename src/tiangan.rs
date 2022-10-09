@@ -38,4 +38,20 @@ impl TianGan {
         let ji_gong:[DZ; 10] = [DZ::Yin, DZ::Chen, DZ::Si, DZ::Wei, DZ::Si, DZ::Wei, DZ::Shen, DZ::Xu, DZ::Hai, DZ::Chou];
         return ji_gong[tgid as usize] as u8;
     }
+
+    pub fn name_to_id(name: &str) -> Option<u8> {
+        return match name {
+            "甲" => Some(0u8),
+            "乙" => Some(1u8),
+            "丙" => Some(2u8),
+            "丁" => Some(3u8),
+            "戊" => Some(4u8),
+            "己" => Some(5u8),
+            "庚" => Some(6u8),
+            "辛" => Some(7u8),
+            "壬" => Some(8u8),
+            "癸" => Some(9u8),
+            _ => None,
+        };
+    }
 }

@@ -28,10 +28,10 @@ fn main() {
         sanchuan: [0;3]
     };
 
-    let lr1 = liuren::LiuRen::init_with_jiang("卯", "亥").unwrap();
-    let lr2 = Box::new(lr1);
-    lr2.all();
+    //let lr1 = liuren::LiuRen::init_with_jiang("卯", "亥").unwrap();
+    //let lr2 = Box::new(lr1);
+    //lr2.all();
 
-    println!("{}", (DZ::Zi as usize));
-    println!("{}", ((1i8 - 2i8) % 12i8));
+    let mut lr3 = LiuRen::init_with_Chinese("卯", "亥","甲","子").unwrap();
+    lr3.all();
 }
