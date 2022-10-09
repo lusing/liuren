@@ -3,9 +3,9 @@ use crate::liuren::LiuRen;
 
 mod liuren;
 mod dizhi;
-mod GanZhi;
-mod TianGan;
-mod Xing;
+mod ganzhi;
+mod tiangan;
+mod xing;
 
 fn main() {
     println!("地盘");
@@ -25,7 +25,7 @@ fn main() {
     };
     LiuRen::format_pan(0);
 
-    let lr1 = liuren::LiuRen::init_with_jiang("卯", "亥")?;
+    let lr1 = liuren::LiuRen::init_with_jiang("卯", "亥").unwrap();
 
     println!("{}",(DZ::Zi as usize));
     println!("{}",((1i8-2i8)%12i8));
