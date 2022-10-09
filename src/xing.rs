@@ -17,32 +17,32 @@ impl Xing {
         return xing_name[self.xingid as usize];
     }
 
-    pub fn sheng2(self, shenger: u8, shengee: u8) -> bool {
+    pub fn sheng2(shenger: u8, shengee: u8) -> bool {
         return (shenger + 1u8) % 5u8 == shengee;
     }
 
-    pub fn ke2(self, ker: u8, kee: u8) -> bool
+    pub fn ke2(ker: u8, kee: u8) -> bool
     {
         return (ker + 2u8) % 5u8 == kee;
     }
 
     pub fn sheng(self, xing: Xing) -> bool
     {
-        if self.sheng2(self.xingid, xing.xingid) {
+        return if Xing::sheng2(self.xingid, xing.xingid) {
             println!("{}生{}", self.get_name(), xing.get_name());
-            return true;
+            true
         } else {
-            return false;
+            false
         }
     }
 
     pub fn ke(self, xing: Xing) -> bool
     {
-        if self.ke2(self.xingid, xing.xingid) {
+        return if Xing::ke2(self.xingid, xing.xingid) {
             println!("{}克{}", self.get_name(), xing.get_name());
-            return true;
+            true
         } else {
-            return false;
+            false
         }
     }
 
