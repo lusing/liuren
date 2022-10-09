@@ -1,4 +1,4 @@
-#[derive(Clone,Copy,Debug)]
+#[derive(Clone, Copy, Debug)]
 pub struct Xing {
     pub xingid: u8,
 }
@@ -21,32 +21,29 @@ impl Xing {
         return (shenger + 1u8) % 5u8 == shengee;
     }
 
-    pub fn ke2(ker: u8, kee: u8) -> bool
-    {
+    pub fn ke2(ker: u8, kee: u8) -> bool {
         return (ker + 2u8) % 5u8 == kee;
     }
 
-    pub fn sheng(self, xing: Xing) -> bool
-    {
+    pub fn sheng(self, xing: Xing) -> bool {
         return if Xing::sheng2(self.xingid, xing.xingid) {
             println!("{}生{}", self.get_name(), xing.get_name());
             true
         } else {
             false
-        }
+        };
     }
 
-    pub fn ke(self, xing: Xing) -> bool
-    {
+    pub fn ke(self, xing: Xing) -> bool {
         return if Xing::ke2(self.xingid, xing.xingid) {
             println!("{}克{}", self.get_name(), xing.get_name());
             true
         } else {
             false
-        }
+        };
     }
 
-    pub fn debug(self) -> &'static str{
+    pub fn debug(self) -> &'static str {
         return self.get_name();
     }
 }

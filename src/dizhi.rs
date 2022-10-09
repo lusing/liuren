@@ -3,6 +3,7 @@ pub struct DiZhi {
     pub dzid: u8,
 }
 
+#[derive(Clone, Copy, Debug)]
 pub enum DZ {
     Zi = 0,
     Chou,
@@ -20,7 +21,9 @@ pub enum DZ {
 
 impl DiZhi {
     pub fn get_name(self) -> &'static str {
-        let dizhi_name: [&str; 12] = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+        let dizhi_name: [&str; 12] = [
+            "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥",
+        ];
         return dizhi_name[self.dzid as usize];
     }
 
@@ -33,10 +36,9 @@ impl DiZhi {
 
     /*
      * 三合
-    */
+     */
 
-    pub fn sanhe2(he1: u8, he2: u8, he3: u8) -> bool
-    {
+    pub fn sanhe2(he1: u8, he2: u8, he3: u8) -> bool {
         return ((he1 + 4) % 12 == he2) && ((he2 + 4) % 12 == he3);
     }
 
@@ -44,8 +46,7 @@ impl DiZhi {
      * 冲
      */
 
-    pub fn chong2(chong1: u8, chong2: u8) -> bool
-    {
+    pub fn chong2(chong1: u8, chong2: u8) -> bool {
         return (chong1 + 6u8) % 12u8 == chong2;
     }
 
@@ -87,7 +88,7 @@ impl DiZhi {
             "酉" => Some(9u8),
             "戌" => Some(10u8),
             "亥" => Some(11u8),
-            _ => None
+            _ => None,
         };
     }
 }
