@@ -23,9 +23,9 @@ fn main() {
         zhi: 0u8,
         jiang: 12u8
     };
-    LiuRen::format_pan(0);
 
     let lr1 = liuren::LiuRen::init_with_jiang("卯", "亥").unwrap();
+    lr1.tian_pan();
 
     println!("{}",(DZ::Zi as usize));
     println!("{}",((1i8-2i8)%12i8));

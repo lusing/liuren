@@ -37,11 +37,38 @@ impl LiuRen {
         println!("{}    {}", dzs[3].get_name(), dzs[10].get_name());
         println!("{}{}{}{}", dzs[2].get_name(), dzs[1].get_name(), dzs[0].get_name(), dzs[11].get_name());
     }
+
+    /*
+     * 排地盘
+     */
+    pub fn di_pan() {
+        LiuRen::format_pan(0);
+    }
+
+    /*
+     * 排天盘
+     */
+    pub fn tian_pan(self) {
+        let tian_start: u8 = (12 + self.jiang - self.time) % 12;
+        LiuRen::format_pan(tian_start);
+
+        /*
+        for(int i=0;i<12;i++)
+        {
+            this->tianpan[i] = (tian_start+i>=0? (tian_start+i) %12 : (tian_start+i) %12 + 12);
+        }
+        */
+    }
+
     pub fn name_to_id(name: String) -> u8 {
         return 0;
     }
 
     pub fn get_yue_jiang(month: u8) -> u8 {
         return 12 - month;
+    }
+
+    pub fn get_month_by_yue_jiang(yuejiang: u8) -> u8 {
+        return 12 - yuejiang;
     }
 }
