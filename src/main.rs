@@ -1,7 +1,8 @@
-use crate::DiZhi::DZ;
+use crate::dizhi::DZ;
+use crate::liuren::LiuRen;
 
 mod liuren;
-mod DiZhi;
+mod dizhi;
 mod GanZhi;
 mod TianGan;
 mod Xing;
@@ -12,8 +13,8 @@ fn main() {
     println!("四课");
     println!("三传");
     
-    let dz = DiZhi::DiZhi { dzid: 0u8};
-    println!("{}",&dz.get_name());
+    let dz = dizhi::DiZhi { dzid: 0u8};
+    println!("{:?}",dz.get_name());
 
     let lr = liuren::LiuRen{
         month: 0u8,
@@ -22,9 +23,9 @@ fn main() {
         zhi: 0u8,
         jiang: 12u8
     };
-    lr.format_pan(0);
+    LiuRen::format_pan(0);
 
-    let _ = liuren::LiuRen::init_with_jiang("卯", "亥");
+    let lr1 = liuren::LiuRen::init_with_jiang("卯", "亥")?;
 
     println!("{}",(DZ::Zi as usize));
     println!("{}",((1i8-2i8)%12i8));
