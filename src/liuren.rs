@@ -1,5 +1,6 @@
 use crate::dizhi::DiZhi;
 use crate::tiangan::TianGan;
+use crate::xing::Xing;
 
 //#[derive(Clone,Copy,Debug)]
 pub struct LiuRen {
@@ -38,8 +39,8 @@ impl LiuRen {
         let jiang_id = DiZhi::name_to_id(jiang)?;
         let rigan_id = TianGan::name_to_id(ri_gan)?;
         let rizhi_id = DiZhi::name_to_id(ri_zhi)?;
-        println!("{:?}时", shi_id);
-        println!("{:?}将", jiang_id);
+        //println!("{:?}时", shi_id);
+        //println!("{:?}将", jiang_id);
         return Some(LiuRen {
             month: 0,
             time: shi_id,
@@ -56,11 +57,11 @@ impl LiuRen {
     /*
      * 格式化地盘和天盘
      */
-    pub fn format_pan(dzid: u8) {
+    pub fn format_pan(dz_id: &u8) {
         let mut dzs: [DiZhi; 12] = [DiZhi { dzid: 0 }; 12];
         for i in 0u8..12 {
             dzs[i as usize] = DiZhi {
-                dzid: (i + dzid) % 12u8,
+                dzid: (i + dz_id) % 12u8,
             };
         }
         println!(
@@ -85,13 +86,15 @@ impl LiuRen {
         self.di_pan();
         self.tian_pan();
         self.si_ke();
+        self.san_chuang();
+        println!("=======================");
     }
 
     /*
      * 排地盘
      */
     pub fn di_pan(&self) {
-        LiuRen::format_pan(0);
+        LiuRen::format_pan(&0);
     }
 
     /*
@@ -99,13 +102,13 @@ impl LiuRen {
      */
     pub fn tian_pan(&mut self) {
         let tian_start: u8 = (12 + self.jiang - self.time) % 12;
-        LiuRen::format_pan(tian_start);
+        LiuRen::format_pan(&tian_start);
 
         for i in 0u8..12 {
             self.tianpan[i as usize] = (12+tian_start+i) % 12u8;
         }
 
-        println!("{:?}",self.tianpan);
+        //println!("{:?}",self.tianpan);
     }
 
     pub fn si_ke(&mut self){
@@ -129,9 +132,9 @@ impl LiuRen {
         let kelow2 = DiZhi{dzid:self.kelow[2]};
         let kelow3 = DiZhi{dzid:self.kelow[3]};
 
-        println!("{:?}",self.tianpan);
-        println!("{:?}",self.kehigh);
-        println!("{:?}",self.kelow);
+        //println!("{:?}",self.tianpan);
+        //println!("{:?}",self.kehigh);
+        //println!("{:?}",self.kelow);
 
         println!("四课：");
         println!("{}{}{}{}",kehigh3.get_name(),kehigh2.get_name(),kehigh1.get_name(),kehigh0.get_name());
@@ -139,6 +142,24 @@ impl LiuRen {
     }
 
     pub fn san_chuang(&mut self){
+        let mut xing_high: [Option<Xing>;4] = [None;4];
+        let mut xing_low : [Option<Xing>;4] = [None;4];
+
+        for i in 0..4 {
+            xing_high[i] = DiZhi{dzid:self.kehigh[i]}.get_xing();
+        }
+
+        xing_low[0] = TianGan{tgid:self.kelow[0]}.get_xing();
+
+        for i in 1..4usize {
+            xing_low[i] = DiZhi{dzid:self.kelow[i]}.get_xing();
+        }
+
+        let  mut v_zei_ke : Vec<usize> = Vec::new();
+        let  mut v_zei_ke_bi_yong : Vec<usize> = Vec::new();
+        let  mut v_ke_ke : Vec<usize> = Vec::new();
+        let  mut v_ke_ke_bi_yong : Vec<usize> = Vec::new();
+
         // 贼克法
         /*
          * 取传先从下贼上
@@ -146,7 +167,41 @@ impl LiuRen {
          * 初传本位名中次
          * 中上因加是末传
          */
+        for i in 0..4 {
+            if xing_low[i].unwrap().ke(xing_high[i].unwrap()) {
+                v_zei_ke.push(i);
+                println!("下贼上！{}",i);
+            }
+        }
 
+        if v_zei_ke.len() == 1 {
+            println!("可以用贼克法取三传，受克者为初传。");
+            let sc1 = self.kehigh[v_zei_ke.pop().unwrap()];
+            println!("{}",DiZhi{dzid:sc1}.get_name());
+            let sc2 = self.tianpan[sc1 as usize];
+            println!("{}",DiZhi{dzid:sc2}.get_name());
+            let sc3 = self.tianpan[sc2 as usize];
+            println!("{}",DiZhi{dzid:sc3}.get_name());
+            return;
+        }
+
+        for i in 0..4 {
+            if xing_high[i].unwrap().ke(xing_low[i].unwrap()) {
+                v_ke_ke.push(i);
+                println!("上克下！{}",i);
+            }
+        }
+
+        if v_ke_ke.len() == 1 {
+            //println!("可以用贼克法取三传，受克者为初传。");
+            let sc1 = self.kelow[v_ke_ke.pop().unwrap()];
+            println!("{}",DiZhi{dzid:sc1}.get_name());
+            let sc2 = self.tianpan[sc1 as usize];
+            println!("{}",DiZhi{dzid:sc2}.get_name());
+            let sc3 = self.tianpan[sc2 as usize];
+            println!("{}",DiZhi{dzid:sc3}.get_name());
+            return;
+        }
 
         // 比用法
 

@@ -57,7 +57,7 @@ impl TianGan {
     }
 
     pub fn get_xing(&self) -> Option<Xing> {
-        return match self.dzid {
+        return match self.tgid {
             0 => Some(Xing{xingid:XING::Mu as u8}),//木
             1 => Some(Xing{xingid:XING::Mu as u8}), //木
             2 => Some(Xing{xingid:XING::Huo as u8}),//火

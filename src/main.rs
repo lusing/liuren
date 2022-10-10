@@ -34,4 +34,11 @@ fn main() {
 
     let mut lr3 = LiuRen::init_with_Chinese("卯", "亥","甲","子").unwrap();
     lr3.all();
+
+    let mut lr4 = LiuRen::init_with_Chinese("午", "酉","甲","辰").unwrap();
+    lr4.all();
+
+    let mut lr5 = LiuRen::init_with_Chinese("巳", "寅","壬","戌").unwrap();
+    lr5.all();
+
 }
