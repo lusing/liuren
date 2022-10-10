@@ -1,3 +1,5 @@
+use crate::xing::{XING, Xing};
+
 #[derive(Clone, Copy, Debug)]
 pub struct DiZhi {
     pub dzid: u8,
@@ -90,5 +92,23 @@ impl DiZhi {
             "亥" => Some(11u8),
             _ => None,
         };
+    }
+
+    pub fn get_xing(&self) -> Option<Xing> {
+        return match self.dzid {
+            0 => Some(Xing{xingid:XING::Shui as u8}),//子水
+            1 => Some(Xing{xingid:XING::Tu as u8}), //丑土
+            2 => Some(Xing{xingid:XING::Mu as u8}),//寅木
+            3 => Some(Xing{xingid:XING::Mu as u8}),//卯木
+            4 => Some(Xing{xingid:XING::Tu as u8}),//辰土
+            5 => Some(Xing{xingid:XING::Huo as u8}),//火
+            6 => Some(Xing{xingid:XING::Huo as u8}),//火
+            7 => Some(Xing{xingid:XING::Tu as u8}),//土
+            8 => Some(Xing{xingid:XING::Jin as u8}),//金
+            9 => Some(Xing{xingid:XING::Jin as u8}), //金
+            10 => Some(Xing{xingid:XING::Tu as u8}), //土
+            11 => Some(Xing{xingid:XING::Shui as u8}), //水
+            _ => None
+        }
     }
 }

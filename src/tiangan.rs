@@ -1,4 +1,5 @@
 use crate::DZ;
+use crate::xing::{Xing, XING};
 
 #[derive(Clone, Copy, Debug)]
 pub struct TianGan {
@@ -53,5 +54,21 @@ impl TianGan {
             "癸" => Some(9u8),
             _ => None,
         };
+    }
+
+    pub fn get_xing(&self) -> Option<Xing> {
+        return match self.dzid {
+            0 => Some(Xing{xingid:XING::Mu as u8}),//木
+            1 => Some(Xing{xingid:XING::Mu as u8}), //木
+            2 => Some(Xing{xingid:XING::Huo as u8}),//火
+            3 => Some(Xing{xingid:XING::Huo as u8}),//火
+            4 => Some(Xing{xingid:XING::Tu as u8}),//土
+            5 => Some(Xing{xingid:XING::Tu as u8}),//土
+            6 => Some(Xing{xingid:XING::Jin as u8}),//金
+            7 => Some(Xing{xingid:XING::Jin as u8}),//金
+            8 => Some(Xing{xingid:XING::Shui as u8}),//水
+            9 => Some(Xing{xingid:XING::Shui as u8}), //水
+            _ => None
+        }
     }
 }

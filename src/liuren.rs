@@ -138,6 +138,27 @@ impl LiuRen {
         println!("{}{}{}{}",kelow3.get_name(),kelow2.get_name(),kelow1.get_name(),kelow0.get_name());
     }
 
+    pub fn san_chuang(&mut self){
+        // 贼克法
+        /*
+         * 取传先从下贼上
+         * 如无下贼上克初
+         * 初传本位名中次
+         * 中上因加是末传
+         */
+
+
+        // 比用法
+
+        // 涉害法
+
+        // 遥克法
+
+        // 昴星法
+
+        //
+    }
+
     pub fn get_yue_jiang(month: u8) -> u8 {
         return 12 - month;
     }
