@@ -11,6 +11,11 @@ pub enum XING {
     Shui,
 }
 
+pub trait WuXing {
+    fn get_xing(&self) -> Option<Xing>;
+    fn get_origin_name(&self) -> &'static str;
+}
+
 impl Xing {
     pub fn get_name(self) -> &'static str {
         let xing_name: [&str; 5] = ["木", "火", "土", "金", "水"];

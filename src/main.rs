@@ -27,7 +27,9 @@ fn main() {
         tianpan: [0;12],
         kelow: [0;4],
         kehigh: [0;4],
-        sanchuan: [0;3]
+        sanchuan: [0;3],
+        kelow2: [None;4],
+        kehigh2: [None;4]
     };
 
     //let lr1 = liuren::LiuRen::init_with_jiang("卯", "亥").unwrap();

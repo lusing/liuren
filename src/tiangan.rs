@@ -1,5 +1,5 @@
 use crate::DZ;
-use crate::xing::{Xing, XING};
+use crate::xing::{WuXing, Xing, XING};
 
 #[derive(Clone, Copy, Debug)]
 pub struct TianGan {
@@ -35,8 +35,8 @@ impl TianGan {
      * 癸课由来丑上坐
      * 分明不用四正辰
      */
-    pub fn get_ji_gong(tgid : u8) -> u8 {
-        let ji_gong:[DZ; 10] = [DZ::Yin, DZ::Chen, DZ::Si, DZ::Wei, DZ::Si, DZ::Wei, DZ::Shen, DZ::Xu, DZ::Hai, DZ::Chou];
+    pub fn get_ji_gong(tgid: u8) -> u8 {
+        let ji_gong: [DZ; 10] = [DZ::Yin, DZ::Chen, DZ::Si, DZ::Wei, DZ::Si, DZ::Wei, DZ::Shen, DZ::Xu, DZ::Hai, DZ::Chou];
         return ji_gong[tgid as usize] as u8;
     }
 
@@ -55,8 +55,10 @@ impl TianGan {
             _ => None,
         };
     }
+}
 
-    pub fn get_xing(&self) -> Option<Xing> {
+impl WuXing for TianGan{
+    fn get_xing(&self) -> Option<Xing> {
         return match self.tgid {
             0 => Some(Xing{xingid:XING::Mu as u8}),//木
             1 => Some(Xing{xingid:XING::Mu as u8}), //木
@@ -70,5 +72,9 @@ impl TianGan {
             9 => Some(Xing{xingid:XING::Shui as u8}), //水
             _ => None
         }
+    }
+
+    fn get_origin_name(&self) -> &'static str {
+        return self.get_name();
     }
 }

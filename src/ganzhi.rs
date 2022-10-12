@@ -1,6 +1,7 @@
+use std::sync::Arc;
 use crate::dizhi::DiZhi;
 use crate::tiangan::TianGan;
-use crate::xing::Xing;
+use crate::xing::{WuXing, Xing};
 
 //#[derive(Clone, Copy, Debug)]
 pub struct GanZhi {
@@ -12,45 +13,39 @@ impl GanZhi {
     pub fn new(self) {}
 }
 
+#[derive(Clone,Copy)]
 pub enum GZ {
     Tg(TianGan),
     Dz(DiZhi)
 }
 
+
 impl GZ{
+    pub fn cmp (a: Box<dyn WuXing>, b: Box<dyn WuXing>) -> bool{
+        if let Some(v) = a.get_xing() {
+            if let Some(v2) = b.get_xing() {
+                let bool1 = v.ke(v2);
+                if bool1 {
+                    println!("{}克{}", a.get_origin_name(), b.get_origin_name());
+                }
+                return bool1;
+            }
+        }
+        return false;
+    }
     pub fn ke(self,other:GZ) -> bool{
         match (self, other){
             (GZ::Tg(a), GZ::Tg(b)) => {
-                if let Some(v) = a.get_xing() {
-                    if let Some(v2) = b.get_xing() {
-                        println!("{}克{}", a.get_name(), b.get_name());
-                        return v.ke(v2);
-                    }
-                }
+                return GZ::cmp(Box::new(a),Box::new(b));
             },
             (GZ::Tg(a2), GZ::Dz(b2)) => {
-                if let Some(v) = a2.get_xing() {
-                    if let Some(v2) = b2.get_xing() {
-                        println!("{}克{}", a2.get_name(), b2.get_name());
-                        return v.ke(v2);
-                    }
-                }
+                return GZ::cmp(Box::new(a2),Box::new(b2));
             },
             (GZ::Dz(a3), GZ::Tg(b3)) => {
-                if let Some(v) = a3.get_xing() {
-                    if let Some(v2) = b3.get_xing() {
-                        println!("{}克{}", a3.get_name(), b3.get_name());
-                        return v.ke(v2);
-                    }
-                }
+                return GZ::cmp(Box::new(a3),Box::new(b3));
             },
             (GZ::Dz(a4), GZ::Dz(b4)) => {
-                if let Some(v) = a4.get_xing() {
-                    if let Some(v2) = b4.get_xing() {
-                        println!("{}克{}", a4.get_name(), b4.get_name());
-                        return v.ke(v2);
-                    }
-                }
+                return GZ::cmp(Box::new(a4),Box::new(b4));
             }
         }
         return false;
