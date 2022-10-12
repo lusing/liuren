@@ -19,8 +19,8 @@ impl LiuRen {
     pub fn init_with_jiang(shi: &str, jiang: &str) -> Option<LiuRen> {
         let shi_id = DiZhi::name_to_id(&shi)?;
         let jiang_id = DiZhi::name_to_id(jiang)?;
-        println!("{:?}时", shi_id);
-        println!("{:?}将", jiang_id);
+        println!("{}时", &shi_id);
+        println!("{}将", &jiang_id);
         return Some(LiuRen {
             month: 0,
             time: shi_id,
@@ -141,6 +141,7 @@ impl LiuRen {
         println!("{}{}{}{}",kelow3.get_name(),kelow2.get_name(),kelow1.get_name(),kelow0.get_name());
     }
 
+    // 三传
     pub fn san_chuang(&mut self){
         let mut xing_high: [Option<Xing>;4] = [None;4];
         let mut xing_low : [Option<Xing>;4] = [None;4];
@@ -167,7 +168,7 @@ impl LiuRen {
          * 初传本位名中次
          * 中上因加是末传
          */
-        for i in 0..4 {
+        for i in 0..4usize {
             if xing_low[i].unwrap().ke(xing_high[i].unwrap()) {
                 v_zei_ke.push(i);
                 println!("下贼上！{}",i);
@@ -182,7 +183,6 @@ impl LiuRen {
             println!("{}",DiZhi{dzid:sc2}.get_name());
             let sc3 = self.tianpan[sc2 as usize];
             println!("{}",DiZhi{dzid:sc3}.get_name());
-            return;
         }
 
         for i in 0..4 {
@@ -190,6 +190,13 @@ impl LiuRen {
                 v_ke_ke.push(i);
                 println!("上克下！{}",i);
             }
+        }
+
+        {
+            let zeis = v_zei_ke.len();
+            let kes = v_ke_ke.len();
+            println!("共计有下贼上{}个",zeis);
+            println!("共计有上克下{}个",kes);
         }
 
         if v_ke_ke.len() == 1 {
@@ -200,7 +207,6 @@ impl LiuRen {
             println!("{}",DiZhi{dzid:sc2}.get_name());
             let sc3 = self.tianpan[sc2 as usize];
             println!("{}",DiZhi{dzid:sc3}.get_name());
-            return;
         }
 
         // 比用法
