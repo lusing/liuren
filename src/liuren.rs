@@ -1,9 +1,10 @@
 use std::borrow::Borrow;
 use std::sync::Arc;
 use crate::dizhi::DiZhi;
+use crate::DZ;
 use crate::ganzhi::{GanZhi, GZ};
 use crate::ganzhi::GZ::{Dz, Tg};
-use crate::tiangan::TianGan;
+use crate::tiangan::{TG, TianGan};
 use crate::xing::{WuXing, Xing};
 
 //#[derive(Clone,Copy,Debug)]
@@ -47,6 +48,28 @@ impl LiuRen {
         let jiang_id = DiZhi::name_to_id(jiang)?;
         let rigan_id = TianGan::name_to_id(ri_gan)?;
         let rizhi_id = DiZhi::name_to_id(ri_zhi)?;
+        //println!("{:?}时", shi_id);
+        //println!("{:?}将", jiang_id);
+        return Some(LiuRen {
+            month: 0,
+            time: shi_id,
+            gan: rigan_id,
+            zhi: rizhi_id,
+            jiang: jiang_id,
+            tianpan: [0; 12],
+            kelow: [0; 4],
+            kehigh: [0; 4],
+            sanchuan: [None; 3],
+            kelow2: [None; 4],
+            kehigh2: [None; 4],
+        });
+    }
+
+    pub fn init(shi: DZ, jiang: DZ, ri_gan: TG, ri_zhi: DZ) -> Option<LiuRen> {
+        let shi_id = shi as u8;
+        let jiang_id = jiang as u8;
+        let rigan_id = ri_gan as u8;
+        let rizhi_id = ri_zhi as u8;
         //println!("{:?}时", shi_id);
         //println!("{:?}将", jiang_id);
         return Some(LiuRen {
@@ -234,14 +257,13 @@ impl LiuRen {
                         v_ke_ke.push(self.kehigh[i] as usize);
                         if ker.is_bi_he(self.gan) {
                             v_ke_ke_bi_yong.push(self.kehigh[i] as usize);
-                            v_ke_ke_bi_yong2.push(kee);
+                            v_ke_ke_bi_yong2.push(ker);
                         }
                     }
                 }
             }
         }
-
-
+        
         let zei_num = v_zei_ke.len();
         let ke_num = v_ke_ke.len();
         println!("共计有下贼上{}个", zei_num);
