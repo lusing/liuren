@@ -128,4 +128,10 @@ fn main() {
     if let Some(mut lr_k_03) = LiuRen::init(DZ::Si, DZ::Chen, TG::Ren, DZ::Chen) {
         lr_k_03.all();
     }
+
+    // =================
+    // 六壬大全
+    if let Some(mut lr_daquan_001) = LiuRen::init(DZ::Mao, DZ::Zi, TG::Jia, DZ::Zi) {
+        lr_daquan_001.all();
+    }
 }
