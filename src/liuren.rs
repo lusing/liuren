@@ -43,7 +43,7 @@ impl LiuRen {
         });
     }
 
-    pub fn init_with_Chinese(shi: &str, jiang: &str, ri_gan: &str, ri_zhi: &str) -> Option<LiuRen> {
+    pub fn init_with_chinese(shi: &str, jiang: &str, ri_gan: &str, ri_zhi: &str) -> Option<LiuRen> {
         let shi_id = DiZhi::name_to_id(&shi)?;
         let jiang_id = DiZhi::name_to_id(jiang)?;
         let rigan_id = TianGan::name_to_id(ri_gan)?;
@@ -263,7 +263,7 @@ impl LiuRen {
                 }
             }
         }
-        
+
         let zei_num = v_zei_ke.len();
         let ke_num = v_ke_ke.len();
         println!("共计有下贼上{}个", zei_num);

@@ -3,7 +3,6 @@ use crate::dizhi::DiZhi;
 use crate::tiangan::TianGan;
 use crate::xing::{WuXing, Xing};
 
-//#[derive(Clone, Copy, Debug)]
 pub struct GanZhi {
     pub gan: u8,
     pub zhi: u8,

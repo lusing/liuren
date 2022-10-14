@@ -47,8 +47,4 @@ impl Xing {
             false
         };
     }
-
-    pub fn debug(self) -> &'static str {
-        return self.get_name();
-    }
 }
