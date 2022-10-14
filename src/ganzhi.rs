@@ -21,6 +21,31 @@ pub enum GZ {
 
 
 impl GZ{
+    pub fn is_yang(&self) -> bool{
+        match self {
+            GZ::Tg(t) => {t.tgid % 2 == 0 },
+            GZ::Dz(d) => {d.dzid % 2 == 0}
+        }
+    }
+    pub fn is_yin(&self) -> bool {
+        return !self.is_yang();
+    }
+
+    // 判断当前干支是否与日干比和
+    pub fn is_bi_he(&self, ri_gan:u8) -> bool{
+        return if ri_gan % 2 == 0u8 {
+            self.is_yang()
+        } else {
+            self.is_yin()
+        }
+    }
+    pub fn get_name(&self) -> &'static str{
+        match self {
+            GZ::Tg(t) => {t.get_name()},
+            GZ::Dz(d) => {d.get_name()}
+        }
+    }
+
     pub fn cmp (a: Box<dyn WuXing>, b: Box<dyn WuXing>) -> bool{
         if let Some(v) = a.get_xing() {
             if let Some(v2) = b.get_xing() {
